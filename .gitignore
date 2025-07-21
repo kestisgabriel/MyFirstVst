@@ -1,0 +1,11 @@
+# JUCE/Xcode Build Artefacts
+Builds/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# IDE files
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
