@@ -173,6 +173,7 @@ void MyFirstVstAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     const float bitDepth = bitDepthParameter->load();
     const float rateReduction = rateReductionParameter->load();
     const float mix = mixParameter->load();
+
     
     const float quantizeStep = 1.0f /(pow(2.0f, bitDepth) - 1.0f);
     
@@ -221,6 +222,8 @@ bool MyFirstVstAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
+
+
 
 juce::AudioProcessorEditor* MyFirstVstAudioProcessor::createEditor()
 {

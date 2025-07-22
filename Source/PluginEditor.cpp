@@ -39,6 +39,13 @@ MyFirstVstAudioProcessorEditor::MyFirstVstAudioProcessorEditor (MyFirstVstAudioP
     mixLabel.setText("Mix", juce::dontSendNotification);
     mixLabel.attachToComponent(&mixSlider, false);
     mixLabel.setJustificationType(juce::Justification::centred);
+    
+    // get APVTS from processor
+    auto& valueTreeState = audioProcessor.getValueTreeState();
+    
+    bitDepthAttachment = std::make_unique<SliderAttachment>(valueTreeState, "bitDepth", bitDepthSlider);
+    rateReductionAttachment = std::make_unique<SliderAttachment>(valueTreeState, "rateReduction", rateReductionSlider);
+    mixAttachment = std::make_unique<SliderAttachment>(valueTreeState, "mix", mixSlider);
 
     setSize (300, 200);
 }

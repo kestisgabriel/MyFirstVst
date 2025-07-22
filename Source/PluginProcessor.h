@@ -19,6 +19,8 @@ public:
     //==============================================================================
     MyFirstVstAudioProcessor();
     ~MyFirstVstAudioProcessor() override;
+    
+    juce::AudioProcessorValueTreeState& getValueTreeState();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
