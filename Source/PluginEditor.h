@@ -30,13 +30,13 @@ private:
     MyFirstVstAudioProcessor& audioProcessor;
     
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-    std::unique_ptr<SliderAttachment> bitDepthAttachment;
-    std::unique_ptr<SliderAttachment> rateReductionAttachment;
-    std::unique_ptr<SliderAttachment> mixAttachment;
-    
     juce::Slider bitDepthSlider;
     juce::Slider rateReductionSlider;
     juce::Slider mixSlider;
+    
+    std::unique_ptr<SliderAttachment> bitDepthAttachment;
+    std::unique_ptr<SliderAttachment> rateReductionAttachment;
+    std::unique_ptr<SliderAttachment> mixAttachment;
     
     juce::Label bitDepthLabel;
     juce::Label rateReductionLabel;
