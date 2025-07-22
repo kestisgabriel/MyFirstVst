@@ -55,6 +55,8 @@ public:
 
 private:
     //==============================================================================
+    // params for bitcrusher
+    
     juce::AudioProcessorValueTreeState parameters;
     
     std::atomic<float>* bitDepthParameter = nullptr;
