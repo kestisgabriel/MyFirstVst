@@ -44,6 +44,11 @@ MyFirstVstAudioProcessor::~MyFirstVstAudioProcessor()
 {
 }
 
+juce::AudioProcessorValueTreeState& MyFirstVstAudioProcessor::getValueTreeState()
+{
+    return parameters;
+}
+
 //==============================================================================
 const juce::String MyFirstVstAudioProcessor::getName() const
 {

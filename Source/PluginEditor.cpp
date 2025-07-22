@@ -67,6 +67,10 @@ void MyFirstVstAudioProcessorEditor::paint (juce::Graphics& g)
 
 void MyFirstVstAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    auto bounds = getLocalBounds();
+    auto sliderWidth = bounds.getWidth() / 3;
+    
+    bitDepthSlider.setBounds(bounds.removeFromLeft(sliderWidth).reduced(10));
+    rateReductionSlider.setBounds(bounds.removeFromLeft(sliderWidth).reduced(10));
+    mixSlider.setBounds(bounds.removeFromLeft(sliderWidth).reduced(10));
 }
