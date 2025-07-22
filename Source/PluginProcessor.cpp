@@ -169,11 +169,50 @@ void MyFirstVstAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    
+    const float bitDepth = bitDepthParameter->load();
+    const float rateReduction = rateReductionParameter->load();
+    const float mix = mixParameter->load();
+    
+    const float quantizeStep = 1.0f /(pow(2.0f, bitDepth) - 1.0f);
+    
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
 
-        // ..do something to the data...
+        for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
+        {
+            float drySample = channelData[sample];
+            float wetSample = drySample;
+            
+            // sample rate reduction
+            if (downsampleCounter >= rateReduction)
+            {
+                downsampleCounter = 1;
+                wetSample = drySample; // capture new sample
+            }
+            else
+            {
+                // use last captureed sample based on channel
+                if (channel == 0) wetSample = lastSampleLeft;
+                else wetSample = lastSampleLeft;
+                
+                downsampleCounter++;
+            }
+            
+            // store last captured sample for next iteration
+            if (channel == 0) lastSampleLeft = wetSample;
+            else lastSampleRight = wetSample;
+            
+            // bit depth reduction
+            if (bitDepth < 32.0f)
+            {
+                wetSample = quantizeStep * floor(wetSample / quantizeStep);
+            }
+            
+            // mix
+            channelData[sample] = (wetSample * mix) + (drySample * (1.0f - mix));
+        }
     }
 }
 

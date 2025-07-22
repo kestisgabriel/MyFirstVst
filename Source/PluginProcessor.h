@@ -63,5 +63,9 @@ private:
     std::atomic<float>* rateReductionParameter = nullptr;
     std::atomic<float>* mixParameter = nullptr;
     
+    int downsampleCounter = 0;
+    float lastSampleLeft = 0.0f;
+    float lastSampleRight = 0.0f;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MyFirstVstAudioProcessor)
 };
