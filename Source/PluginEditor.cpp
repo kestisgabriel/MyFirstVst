@@ -13,9 +13,34 @@
 MyFirstVstAudioProcessorEditor::MyFirstVstAudioProcessorEditor (MyFirstVstAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    
+    // bit depth
+    
+    bitDepthSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    bitDepthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    addAndMakeVisible(bitDepthSlider);
+    bitDepthLabel.setText("Bit Depth", juce::dontSendNotification);
+    bitDepthLabel.attachToComponent(&bitDepthSlider, false);
+    bitDepthLabel.setJustificationType(juce::Justification::centred);
+    
+    // rate reduction
+    
+    rateReductionSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    rateReductionSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    addAndMakeVisible(rateReductionSlider);
+    rateReductionLabel.setText("Rate Reduce", juce::dontSendNotification);
+    rateReductionLabel.attachToComponent(&rateReductionSlider, false);
+    rateReductionLabel.setJustificationType(juce::Justification::centred);
+    
+    // mix
+    mixSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    mixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 20);
+    addAndMakeVisible(mixSlider);
+    mixLabel.setText("Mix", juce::dontSendNotification);
+    mixLabel.attachToComponent(&mixSlider, false);
+    mixLabel.setJustificationType(juce::Justification::centred);
+
+    setSize (300, 200);
 }
 
 MyFirstVstAudioProcessorEditor::~MyFirstVstAudioProcessorEditor()
